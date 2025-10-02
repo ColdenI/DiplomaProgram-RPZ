@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace DiplomaProgram_RPZ.scr.form
 {
-    public partial class AdminForm : Form
+    public partial class MainForm : Form
     {
-        public AdminForm()
+        public MainForm()
         {
             InitializeComponent();
         }
