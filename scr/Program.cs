@@ -1,3 +1,5 @@
+using DiplomaProgram_RPZ.scr.form;
+
 namespace DiplomaProgram_RPZ.scr
 {
     internal static class Program
