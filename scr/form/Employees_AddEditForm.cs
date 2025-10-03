@@ -14,7 +14,7 @@ namespace DiplomaProgram_RPZ.scr.form
         TextBox textBox_Position;
         DateTimePicker dateTimePicker_HireDate;
         ComboBox comboBox_DepartmentID;
-        TextBox textBox_RoleID;
+        ComboBox comboBox_RoleID;
 
         TextBox textBox_Login;
         TextBox textBox_Password;
@@ -37,7 +37,7 @@ namespace DiplomaProgram_RPZ.scr.form
             textBox_Position.Text = obj.Position.ToString();
             dateTimePicker_HireDate.Value = (DateTime)obj.HireDate;
             comboBox_DepartmentID.SelectedIndex = indexOf_Departments(obj.DepartmentID);
-            textBox_RoleID.Text = obj.RoleID.ToString();
+            comboBox_RoleID.SelectedIndex = obj.RoleID;
 
             try
             {
@@ -104,10 +104,13 @@ namespace DiplomaProgram_RPZ.scr.form
             Label label_RoleID = new Label();
             SetLabel(ref label_RoleID, "Роль");
             tableLayout.Controls.Add(label_RoleID, 0, 4);
-            textBox_RoleID = new TextBox();
-            textBox_RoleID.Dock = DockStyle.Fill;
-            textBox_RoleID.MaxLength = 254;
-            tableLayout.Controls.Add(textBox_RoleID, 1, 4);
+            comboBox_RoleID = new ComboBox();
+            comboBox_RoleID.Items.Add("Доступ ограничен");           
+            comboBox_RoleID.Items.Add("Админ");
+            comboBox_RoleID.Items.Add("Менеджер");
+            comboBox_RoleID.Dock = DockStyle.Fill;
+            comboBox_RoleID.MaxLength = 254;
+            tableLayout.Controls.Add(comboBox_RoleID, 1, 4);
 
             Label label_login = new Label();
             SetLabel(ref label_login, "Логин");
@@ -162,7 +165,7 @@ namespace DiplomaProgram_RPZ.scr.form
             if (string.IsNullOrWhiteSpace(textBox_Login.Text)) { MessageBox.Show("Поле Логин имеет некорректное значение!"); return; }
             if (string.IsNullOrWhiteSpace(textBox_Password.Text)) { MessageBox.Show("Поле Пароль имеет некорректное значение!"); return; }
             if (comboBox_DepartmentID.SelectedIndex == -1) { MessageBox.Show("Поле Департамент имеет некорректное значение!"); return; }
-            if (!int.TryParse(textBox_RoleID.Text, out int tp_RoleID)) { MessageBox.Show("Поле Роль имеет некорректное значение!"); return; }
+            if (comboBox_RoleID.SelectedIndex == -1) { MessageBox.Show("Поле Роль имеет некорректное значение!"); return; }
 
             int res = 0;
 
@@ -175,7 +178,7 @@ namespace DiplomaProgram_RPZ.scr.form
                         Position = textBox_Position.Text,
                         HireDate = dateTimePicker_HireDate.Value,
                         DepartmentID = Departments[comboBox_DepartmentID.SelectedIndex].DepartmentID,
-                        RoleID = int.Parse(textBox_RoleID.Text)
+                        RoleID = comboBox_RoleID.SelectedIndex
                     }
                 );
                 if (res == -1)
@@ -203,7 +206,7 @@ namespace DiplomaProgram_RPZ.scr.form
                         Position = textBox_Position.Text,
                         HireDate = dateTimePicker_HireDate.Value,
                         DepartmentID = Departments[comboBox_DepartmentID.SelectedIndex].DepartmentID,
-                        RoleID = int.Parse(textBox_RoleID.Text)
+                        RoleID = comboBox_RoleID.SelectedIndex
                     }
                 );
                 if (res == -1)
